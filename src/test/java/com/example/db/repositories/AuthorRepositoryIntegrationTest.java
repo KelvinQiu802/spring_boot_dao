@@ -81,9 +81,23 @@ public class AuthorRepositoryIntegrationTest {
         underTest.save(authorB);
         underTest.save(authorC);
 
+        // JPA know what this method means and create the impl automatically
         Iterable<Author> results = underTest.ageLessThan(50);
         assertThat(results).contains(authorB, authorC);
+    }
 
+    @Test
+    public void testGetAuthorWithAgeGraterThan() {
+        Author authorA = TestDataUtil.createTestAuthorA();
+        Author authorB = TestDataUtil.createTestAuthorB();
+        Author authorC = TestDataUtil.createTestAuthorC();
+        underTest.save(authorA);
+        underTest.save(authorB);
+        underTest.save(authorC);
+
+        // JPA can figure out the impl by this method name
+        Iterable<Author> result = underTest.findAuthorAgeGraterThan(50);
+        assertThat(result).containsExactly(authorA);
     }
 
 }
