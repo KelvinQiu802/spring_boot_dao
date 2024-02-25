@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Reference;
 
 @Data
 @AllArgsConstructor
@@ -21,7 +20,7 @@ public class Book {
     private String title;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
     private Author author;
 
 }
